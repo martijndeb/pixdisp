@@ -18,6 +18,7 @@ class App
 		holder.appendChild( canvas );
 
 		canvas.addEventListener( 'click', this.handleCanvas );
+		document.getElementById( 'submitImage' ).addEventListener( 'click', this.submitCanvas );
 
 		this.canvas = canvas;
 		this.context = canvas.getContext( '2d' );
@@ -116,6 +117,42 @@ class App
 		app.context.fillStyle = `rgba(${app.selectedR}, ${app.selectedG}, ${app.selectedB}, 1)`;
 		app.context.fillRect( mouseX, mouseY, 1, 1 );
 
+	}
+
+	submitCanvas( ev ) {
+
+		if ( ev.preventDefault ) {
+			ev.preventDefault();
+		}
+
+		let imageData = app.context.getImageData( 0, 0, app.canvas.width, app.canvas.height );
+		let request = new XMLHttpRequest();
+
+		request.open( 'POST', '/api/writecanvas', true );
+		request.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
+
+		let obj = [];
+		for ( let x = 0; x < app.canvas.width; x++ ) {
+			for ( let y = 0; y < app.canvas.height; y++ ) {
+				let index = ( y * app.canvas.width + x ) * 4;
+				let r = imageData.data[ index ];
+				let g = imageData.data[ index + 1 ];
+				let b = imageData.data[ index + 2 ];
+
+				if ( r > 0 || g > 0 || b > 0 ) {
+					obj.push( {
+						x: x,
+						y: y,
+						r: r,
+						g: g,
+						b: b
+					} )
+				}
+			}
+		}
+
+		obj = encodeURI( 'data=' + JSON.stringify( obj ) );
+		request.send( obj );
 	}
 
 }

@@ -2,7 +2,7 @@
 
 let { Driver } = require( './driver' );
 
-class UnicornHatHD extends Driver {
+class PimoroniUnicorn extends Driver {
 	constructor() {
 		super();
 
@@ -26,4 +26,4 @@ class UnicornHatHD extends Driver {
 	}
 }
 
-exports.UnicornHatHD = UnicornHatHD;
+exports.PimoroniUnicorn = PimoroniUnicorn;

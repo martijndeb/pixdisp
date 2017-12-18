@@ -1,5 +1,7 @@
 NEEDS BETTER README!
 
+Make sure you are on a recent nodejs version. Raspbian has old version. Use nodesource ;).
+
 npm install
 
 node pixdisp.js

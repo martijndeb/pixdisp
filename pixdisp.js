@@ -1,18 +1,36 @@
 'use strict';
 
-let { UnicornHatHD } = require( './drivers/unicornhathd' );
+let fs = require( 'fs' );
+let config;
+let api;
+
+if ( fs.existsSync( 'config.json' ) ) {
+    let contents = fs.readFileSync( 'config.json' );
+    config = JSON.parse( contents );
+} else {
+    let contents = fs.readFileSync( 'config.example.json' );
+    config = JSON.parse( contents );
+}
+
+let driver;
+let { DriverFactory } = require( './drivers/driverfactory' );
+let driverFactory = new DriverFactory();
+
+let { ApiController } = require( './controllers/apicontroller' );
 
 let restify = require( 'restify' );
 
-let bindAddr = '0.0.0.0';
-let bindPort = 8080;
+let bindAddr = config.bindAddr;
+let bindPort = config.bindPort;
 
 let server = restify.createServer( {
 	handleUpgrades: true
 } );
 
 server.use( restify.plugins.queryParser() );
-server.use( restify.plugins.bodyParser() );
+server.use( restify.plugins.bodyParser( {
+    mapParams: true
+} ) );
 server.use( restify.plugins.jsonp() );
 server.use( restify.plugins.gzipResponse() );
 server.use( restify.plugins.throttle(
@@ -22,6 +40,11 @@ server.use( restify.plugins.throttle(
         ip: true
     }
 ));
+
+driver = driverFactory.createFromConfig( config );
+driver.write( driver.getBuffer() );
+
+api = new ApiController( server, driver );
 
 server.get(/.*/, restify.plugins.serveStatic({
 
@@ -36,13 +59,5 @@ server.listen( bindPort, bindAddr, function() {
 
     console.log( '%s listening at %s ', server.name , server.url );
     console.log( 'Ready.' );
-
-    // Some test code
-    let driver = new UnicornHatHD();
-    driver.setPixel( 1, 1, 255, 0, 0 );
-    driver.setPixel( 5, 5, 255, 0, 255 );
-
-    let buffer = driver.getBuffer();
-    driver.write( buffer );
 
 });

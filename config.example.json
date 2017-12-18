@@ -1,0 +1,14 @@
+{
+	"bindAddr": "0.0.0.0",
+	"bindPort": 8080,
+
+	"driver": "dummy",
+
+	"matrix": {
+		"width": 16,
+		"height": 16,
+		"brightness": 1,
+		"flipHorizontal": false,
+		"flipVertical": false
+	}
+}

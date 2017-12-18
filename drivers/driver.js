@@ -10,6 +10,9 @@ class Driver {
 		this.setSize( 16, 16 );
 		this.setBrightness( 1 );
 
+		this.flipHorizontal = false;
+		this.flipVertical = false;
+
 	}
 
 	/**
@@ -19,7 +22,7 @@ class Driver {
 		this.width = w;
 		this.height = h;
 
-		this.createMatrix();
+		this.clearMatrix();
 	}
 
 	/**
@@ -84,6 +87,8 @@ class Driver {
 	 * @return {Buffer}
 	 */
 	getBuffer() {
+		this.flipMatrix( this.flipHorizontal, this.flipVertical );
+
 		let buffer = new Buffer( this.width * this.height * 3 );
 
 		let size = this.getSize();
@@ -100,22 +105,38 @@ class Driver {
 		return buffer;
 	}
 
+	/**
+	 * Write output to the device. Implement at driver level.
+	 */
 	write( buffer ) {
 		console.log( 'Driver should implement this' );
 	}
 
 	/**
+	 * Flip the matrix along it's axis.
+	 */
+	flipMatrix( horizontal, vertical ) {
+		if ( horizontal === true ) {
+			for ( let i = 0; i < this.matrix.length; i++ ) {
+				this.matrix[ i ].reverse();
+			}
+		}
+
+		if ( vertical === true ) {
+			this.matrix.reverse();
+		}
+	}
+
+	/**
 	 * Create the internal frame
 	 */
-	createMatrix() {
+	clearMatrix() {
 		this.matrix = [];
 
-		let size = this.getSize();
-
-		for ( let y = 0; y < size.height; y++ ) {
+		for ( let y = 0; y < this.height; y++ ) {
 			this.matrix.push( [] );
 
-			for ( let x = 0; x < size.width; x++  ) {
+			for ( let x = 0; x < this.width; x++  ) {
 				this.matrix[ y ].push( {
 					r: 0,
 					g: 0,

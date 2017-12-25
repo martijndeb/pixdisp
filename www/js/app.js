@@ -3,8 +3,19 @@
 class App
 {
 	constructor() {
-		this.createCanvas(16,16);
-		this.createPalette();
+		let request = new XMLHttpRequest();
+		request.open( 'GET', '/api/getdisplaysize', true );
+		request.onload = this.onGetDisplaySizeFinished;
+		request.send();
+	}
+
+	onGetDisplaySizeFinished() {
+		if ( this.status >= 200 && this.status < 400 ) {
+			let resp = JSON.parse( this.responseText );
+
+			app.createCanvas( resp.width, resp.height );
+			app.createPalette();
+		}
 	}
 
 	createCanvas( width, height ) {

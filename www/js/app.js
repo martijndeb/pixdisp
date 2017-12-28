@@ -30,6 +30,7 @@ class App
 
 		canvas.addEventListener( 'click', this.handleCanvas );
 		document.getElementById( 'submitImage' ).addEventListener( 'click', this.submitCanvas );
+		document.getElementById( 'captureCamera' ).addEventListener( 'click', this.captureCamera );
 
 		this.canvas = canvas;
 		this.context = canvas.getContext( '2d' );
@@ -164,6 +165,41 @@ class App
 
 		obj = encodeURI( 'data=' + JSON.stringify( obj ) );
 		request.send( obj );
+
+	}
+
+	captureCamera( ev ) {
+
+		if ( ev.preventDefault ) {
+			ev.preventDefault();
+		}
+
+		navigator.mediaDevices.getUserMedia( { video: true, audio: false } )
+			.then( function( stream ) {
+				let vs = document.getElementById( 'videoStream' );
+				vs.srcObject = stream;
+				vs.play();
+
+				app.drawVideoToCanvas();
+			} )
+			.catch( function( err ) {
+				console.warn( err );
+			} )
+		;
+
+	}
+
+	drawVideoToCanvas() {
+
+		try {
+
+			let vs = document.getElementById( 'videoStream' );
+			app.context.drawImage( vs, 0, 0, app.canvas.width, app.canvas.height );
+
+		} catch ( err ) { }
+
+		window.requestAnimationFrame( app.drawVideoToCanvas );
+
 	}
 
 }

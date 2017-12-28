@@ -52,12 +52,13 @@ class Driver {
 	/**
 	 * CLear the matrix with the following color, from 0..255
 	 */
-	clear( r = 0, g = 0, b = 0) {
+	clear( r = 0, g = 0, b = 0, a = 1 ) {
 		for ( let x = 0; x < this.width; x++ ) {
 			for ( let y = 0; y < this.height; y++) {
 				this.matrix[x][y].r = r;
 				this.matrix[x][y].g = g;
 				this.matrix[x][y].b = b;
+				this.matrix[x][y].a = a;
 			}
 		}
 	}
@@ -65,10 +66,11 @@ class Driver {
 	/**
 	 * Set pixel color
 	 */
-	setPixel( x, y, r = 0, g = 0, b = 0 ) {
+	setPixel( x, y, r = 0, g = 0, b = 0, a = 1 ) {
 		this.matrix[x][y].r = r;
 		this.matrix[x][y].g = g;
 		this.matrix[x][y].b = b;
+		this.matrix[x][y].a = a;
 	}
 
 	/**
@@ -79,6 +81,7 @@ class Driver {
 			r: this.matrix[x][y].r,
 			g: this.matrix[x][y].g,
 			b: this.matrix[x][y].b,
+			a: this.matrix[x][y].a
 		}
 	}
 
@@ -96,9 +99,9 @@ class Driver {
 		// @TODO: for now this only supports square displays!
 		for ( let y = 0; y < size.height; y++ ) {
 			for ( let x = 0; x < size.width; x++  ) {
-				buffer[ y * size.height * 3 + x * 3 + 0 ] = this.matrix[ x ][ y ].r * this.brightness;
-				buffer[ y * size.height * 3 + x * 3 + 1 ] = this.matrix[ x ][ y ].g * this.brightness;
-				buffer[ y * size.height * 3 + x * 3 + 2 ] = this.matrix[ x ][ y ].b * this.brightness;
+				buffer[ y * size.height * 3 + x * 3 + 0 ] = this.matrix[ x ][ y ].r * this.matrix[ x ][ y ].a * this.brightness;
+				buffer[ y * size.height * 3 + x * 3 + 1 ] = this.matrix[ x ][ y ].g * this.matrix[ x ][ y ].a * this.brightness;
+				buffer[ y * size.height * 3 + x * 3 + 2 ] = this.matrix[ x ][ y ].b * this.matrix[ x ][ y ].a * this.brightness;
 			}
 		}
 
@@ -140,7 +143,8 @@ class Driver {
 				this.matrix[ y ].push( {
 					r: 0,
 					g: 0,
-					b: 0
+					b: 0,
+					a: 1
 				} );
 			}
 		}

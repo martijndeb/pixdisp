@@ -67,21 +67,108 @@ class Driver {
 	 * Set pixel color
 	 */
 	setPixel( x, y, r = 0, g = 0, b = 0, a = 1 ) {
-		this.matrix[x][y].r = r;
-		this.matrix[x][y].g = g;
-		this.matrix[x][y].b = b;
-		this.matrix[x][y].a = a;
+		if ( x >= 0 && x <= this.width &&
+			 y >= 0 && y <= this.height ) {
+			this.matrix[x][y].r = r;
+			this.matrix[x][y].g = g;
+			this.matrix[x][y].b = b;
+			this.matrix[x][y].a = a;
+		}
 	}
 
 	/**
 	 * Return the pixel color
 	 */
 	getPixel( x, y ) {
+		if ( x >= 0 && x <= this.width &&
+			 y >= 0 && y <= this.height ) {
+			return {
+				r: this.matrix[x][y].r,
+				g: this.matrix[x][y].g,
+				b: this.matrix[x][y].b,
+				a: this.matrix[x][y].a
+			}
+		}
+
 		return {
-			r: this.matrix[x][y].r,
-			g: this.matrix[x][y].g,
-			b: this.matrix[x][y].b,
-			a: this.matrix[x][y].a
+			r: -1,
+			g: -1,
+			b: -1,
+			a: -1
+		}
+	}
+
+	/**
+	 * Draw a line from x1,y1 to x2,y2
+	 */
+	drawLine( x1, y1, x2, y2, r = 0, g = 0, b = 0, a = 1 ) {
+		let dx = x2 - x1;
+		let dy = y2 - y1;
+
+		for ( let x = x1; x <= x2; x++ ) {
+			let y = Math.floor( y1 + dy * ( x - x1 ) / dx );
+
+			this.setPixel( x, y, r, g, b, a );
+		}
+	}
+
+	/**
+	 * Draw a rectangle from x,y with dimensions w,h
+	 */
+	drawRect( x1, y1, w, h, r = 0, g = 0, b = 0, a = 1 ) {
+		for ( let x = x1; x < x1 + w; x++ ) {
+			this.setPixel( x, y1, r, g, b, a );
+			this.setPixel( x, y1 + h - 1, r, g, b, a );
+		}
+
+		for ( let y = y1; y < y1 + h - 1; y++ ) {
+			this.setPixel( x1, y, r, g, b, a );
+			this.setPixel( x1 + w - 1, y, r, g, b, a );
+		}
+	}
+
+	/**
+	 * Draw a rectangle from x,y with dimensions w,h
+	 */
+	drawRectFilled( x1, y1, w, h, r = 0, g = 0, b = 0, a = 1 ) {
+		for ( let x = x1; x < x1 + w; x++ ) {
+			for ( let y = y1; y < y1 + h; y++ ) {
+				this.setPixel( x, y, r, g, b, a );
+			}
+		}
+	}
+
+	/**
+	 * Draws a circle at x,y with radius r
+	 */
+	drawCircle( x1, y1, radius, r = 0, g = 0, b = 0, a = 1 ) {
+		let x = radius - 1;
+		let y = 0;
+		let dx = 1;
+		let dy = 1;
+		let err = dx - ( radius << 1 );
+
+		while ( x >= y ) {
+			this.setPixel( x1 + x, y1 + y, r, g, b, a );
+			this.setPixel( x1 + y, y1 + x, r, g, b, a );
+			this.setPixel( x1 - y, y1 + x, r, g, b, a );
+			this.setPixel( x1 - x, y1 + y, r, g, b, a );
+			this.setPixel( x1 - x, y1 - y, r, g, b, a );
+			this.setPixel( x1 - y, y1 - x, r, g, b, a );
+			this.setPixel( x1 + y, y1 - x, r, g, b, a );
+			this.setPixel( x1 + x, y1 - y, r, g, b, a );
+
+			if ( err <= 0 ) {
+				y++;
+				err += dy;
+				dy += 2;
+			}
+
+			if ( err > 0 ) {
+				x--;
+				dx += 2;
+				err += dx - ( radius << 1 );
+			}
 		}
 	}
 

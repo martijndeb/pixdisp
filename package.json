@@ -1,4 +1,11 @@
 {
+  "name": "pixdisp",
+  "description": "Little application to drive Led matrix displays on your raspberry pi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sexybiggetje/pixdisp.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "pi-spi": "^1.0.2",
     "restify": "^6.3.4"

@@ -1,14 +1,15 @@
-A small application to drive LED matrix dusplays, such as the pimoroni unicorn, from nodejs. Intends to become a digital graffiti/guestbook system.
+A small application to drive LED matrix displays, such as the pimoroni unicorn, from nodejs. My intention is to create a digital graffiti/guestbook system.
 
-Make sure you are on a recent nodejs version. Raspbian has old version. Use nodesource ;).
+Make sure you are on a recent nodejs version. Raspbian has an old version. Use nodesource ;).
 
-copy config.example.json to config.json and pick a driver + display size.
+Copy config.example.json to config.json and pick a driver + display size.
 
-npm install
+execute:
 
-nodejs pixdisp.js
+    npm install
+    nodejs pixdisp.js
 
-http://localhost:8080/
+Navigate to http://localhost:8080/
 
 Matrix driver & Unicorn Hat HD driver inspired by https://github.com/vesteraas/node-unicornhathd
 

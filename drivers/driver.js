@@ -55,10 +55,7 @@ class Driver {
 	clear( r = 0, g = 0, b = 0, a = 1 ) {
 		for ( let x = 0; x < this.width; x++ ) {
 			for ( let y = 0; y < this.height; y++) {
-				this.matrix[x][y].r = r;
-				this.matrix[x][y].g = g;
-				this.matrix[x][y].b = b;
-				this.matrix[x][y].a = a;
+				this.setPikel( x, y, r, g, b, a );
 			}
 		}
 	}

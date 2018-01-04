@@ -1,9 +1,9 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Known Vulnerabilities](https://snyk.io/test/github/sexybiggetje/pixdisp/badge.svg?targetFile=package.json)](https://snyk.io/test/github/sexybiggetje/pixdisp?targetFile=package.json)
 
-A small application to drive LED matrix displays, such as the pimoroni unicorn, from nodejs. My intention is to create a digital graffiti/guestbook system.
+A small application to drive LED matrix displays, such as the [Pimoroni Unicorn](https://shop.pimoroni.com/?q=unicorn%20hat), from nodejs. My intention is to create a digital graffiti/guestbook system and a general animation system. This is a project for fun, so if you have a feature just request it! Or add it and I'll review it. Social coding ftw.
 
-Make sure you are on a recent nodejs version. Raspbian has an old version. Use nodesource ;).
+Make sure you are on a recent nodejs version. Raspbian has an old version. Use [Nodesource](https://github.com/nodesource/distributions) ;).
 
 Also, use a decent modern browser. I wrote recent syntax, so probably works best in Chrome 62+. Firefox is known to have some issues, Edge works, Safari is a PITA. Just wait for your browser to play catch up then with recent standards. If you dislike Chrome, you can put this trough Babel. But you're on your own there.
 

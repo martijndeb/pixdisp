@@ -1,5 +1,6 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Known Vulnerabilities](https://snyk.io/test/github/sexybiggetje/pixdisp/badge.svg?targetFile=package.json)](https://snyk.io/test/github/sexybiggetje/pixdisp?targetFile=package.json)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7178fe123a6aed4cd277/maintainability)](https://codeclimate.com/github/sexybiggetje/pixdisp/maintainability)
 
 A small application to drive LED matrix displays, such as the [Pimoroni Unicorn](https://shop.pimoroni.com/?q=unicorn%20hat), from nodejs. My intention is to create a digital graffiti/guestbook system and a general animation system. This is a project for fun, so if you have a feature just request it! Or add it and I'll review it. Social coding ftw.
 

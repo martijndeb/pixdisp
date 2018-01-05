@@ -1,16 +1,29 @@
 'use strict';
 
 let fs = require( 'fs' );
-let config;
-let api;
+let os = require( 'os' );
+
+let config,
+    api,
+    contents;
 
 if ( fs.existsSync( 'config.json' ) ) {
-    let contents = fs.readFileSync( 'config.json' );
-    config = JSON.parse( contents );
+    contents = fs.readFileSync( 'config.json' );
+} else if ( fs.existsSync( os.homedir() + '/.pixdisp/config.json' ) ) {
+    contents = fs.readFileSync( os.homedir() + '/.pixdisp/config.json' );
 } else {
-    let contents = fs.readFileSync( 'config.example.json' );
-    config = JSON.parse( contents );
+    contents = fs.readFileSync( 'config.example.json' );
 }
+
+if ( typeof contents === 'undefined' ||
+     contents === false || contents === undefined ||
+     contents === ''  ) {
+
+    console.log( 'Invalid or no configuration' );
+    process.exit();
+}
+
+config = JSON.parse( contents );
 
 let driver;
 let { DriverFactory } = require( './drivers/driverfactory' );

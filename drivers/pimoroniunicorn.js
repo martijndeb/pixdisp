@@ -6,11 +6,17 @@ class PimoroniUnicorn extends Driver {
 	constructor() {
 		super();
 
-		let SPI = require( 'pi-spi' );
-		this.spi = SPI.initialize( '/dev/spidev0.0' );
+		this.initializedSpi = false;
 	}
 
 	write( buffer ) {
+		if ( this.initializedSpi !== true ) {
+			this.initializedSpi = true;
+
+			let SPI = require( 'pi-spi' );
+			this.spi = SPI.initialize( '/dev/spidev0.0' );
+		}
+
 		this.spi.write(
 			Buffer.concat(
 				[ new Buffer( [ 0x72 ] ),

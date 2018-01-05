@@ -1,5 +1,9 @@
 # Application data
 config.json
+__coverage__
+
+# os x
+._*
 
 # Logs
 logs

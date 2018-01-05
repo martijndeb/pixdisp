@@ -19,6 +19,16 @@
   "jest": {
     "name": "pixdisp",
     "testRegex": "(/__tests__/.[^_]*|(\\.|/)(test|spec))\\.jsx?$",
-    "verbose": true
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "__coverage__",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
+    "collectCoverageFrom": [
+      "drivers/**",
+      "controllers/**"
+    ]
   }
 }

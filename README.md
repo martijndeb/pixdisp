@@ -26,6 +26,8 @@ execute:
 
     npm test
 
+The coverage flag is optional, but provides helpful encouragement to write tests.
+
 ### Drawing
 ![Device drawing](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/device.jpg "Drawing on the device")
 

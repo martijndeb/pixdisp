@@ -1,20 +1,26 @@
 "use strict";
 
 let { Driver } = require( './driver' );
+let fs = require( 'fs' );
+
 
 class PimoroniUnicorn extends Driver {
 	constructor() {
 		super();
 
-		this.initializedSpi = false;
+		this.spi = false;
+		this.spiPath = '/dev/spidev0.0';
 	}
 
 	write( buffer ) {
-		if ( this.initializedSpi !== true ) {
-			this.initializedSpi = true;
-
-			let SPI = require( 'pi-spi' );
-			this.spi = SPI.initialize( '/dev/spidev0.0' );
+		if ( this.spi === false) {
+			if ( fs.existsSync( this.spiPath ) ) {
+				let SPI = require( 'pi-spi' );
+				this.spi = SPI.initialize( this.spiPath );
+			} else {
+				console.warn( 'Device path ' + this.spiPath + ' was unavailable.' );
+				return;
+			}
 		}
 
 		this.spi.write(

@@ -2,6 +2,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=5f1e92945cab5ebb28e276edc875aee6a08453d3e888d32e1a52da99fe10d2c0
 language: node_js
+node_js:
   - "9"
   - "8"
 before_script:

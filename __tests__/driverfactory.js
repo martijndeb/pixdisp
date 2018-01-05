@@ -21,10 +21,19 @@ beforeEach(() => {
 });
 
 test( 'Dummy driver to be properly created', () => {
-	expect( driverFactory.createFromConfig( config ) ).toBeInstanceOf( Dummy );
+	let driver = driverFactory.createFromConfig( config );
+
+	driver.silence = true;
+
+	expect( driver ).toBeInstanceOf( Dummy );
+	expect( driver.write( driver.getBuffer() ) ).toBeUndefined();
 } );
 
 test( 'Pimoroni Unicorn driver to be properly created', () => {
 	config.driver = "pimoroniunicorn";
-	expect( driverFactory.createFromConfig( config ) ).toBeInstanceOf( PimoroniUnicorn );
+
+	let driver = driverFactory.createFromConfig( config );
+
+	expect( driver ).toBeInstanceOf( PimoroniUnicorn );
+	expect( driver.write( driver.getBuffer() ) ).toBeUndefined();
 } );

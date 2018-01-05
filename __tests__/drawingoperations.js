@@ -89,3 +89,69 @@ test( 'Draw a circle', () => {
 	expect( matrix[ 3 ][ 1 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
 
 } );
+
+test( 'Draw a rectangle', () => {
+	driver = driverFactory.createFromConfig( config );
+
+	driver.drawRect( 0, 0, 4, 4, 255, 255, 255, 1 );
+
+	let matrix = driver.getMatrix();
+
+	expect( matrix[ 0 ][ 0 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 0 ][ 3 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 3 ][ 3 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 3 ][ 0 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+
+	expect( matrix[ 1 ][ 1 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 1 ][ 2 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 2 ][ 1 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 2 ][ 2 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+
+} );
+
+test( 'Draw a filled rectangle', () => {
+	driver = driverFactory.createFromConfig( config );
+
+	driver.drawRectFilled( 0, 0, 4, 4, 255, 255, 255, 1 );
+
+	let matrix = driver.getMatrix();
+
+	expect( matrix[ 0 ][ 0 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 0 ][ 3 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 3 ][ 3 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 3 ][ 0 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+
+	expect( matrix[ 1 ][ 1 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 1 ][ 2 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 2 ][ 1 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 2 ][ 2 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+
+} );
+
+test( 'Draw a line and clear the matrix', () => {
+	driver = driverFactory.createFromConfig( config );
+
+	driver.drawLine( 0, 0, 3, 3, 255, 255, 255, 1 );
+
+	let matrix = driver.getMatrix();
+
+	expect( matrix[ 0 ][ 0 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 1 ][ 1 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 2 ][ 2 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+	expect( matrix[ 3 ][ 3 ] ).toEqual( { r: 255, g: 255, b: 255, a: 1} );
+
+	expect( matrix[ 0 ][ 1 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 1 ][ 2 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 2 ][ 3 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 3 ][ 0 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+
+	driver.clear( 0, 0, 0, 1 );
+
+	matrix = driver.getMatrix();
+
+	expect( matrix[ 0 ][ 0 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 1 ][ 1 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 2 ][ 2 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+	expect( matrix[ 3 ][ 3 ] ).toEqual( { r: 0, g: 0, b: 0, a: 1} );
+
+} );

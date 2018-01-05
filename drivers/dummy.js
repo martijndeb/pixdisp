@@ -5,10 +5,14 @@ let { Driver } = require( './driver' );
 class Dummy extends Driver {
 	constructor() {
 		super();
+
+		this.silence = false;
 	}
 
 	write( buffer ) {
-		console.log( buffer );
+		if ( this.silence !== true ) {
+			console.log( buffer );
+		}
 	}
 }
 

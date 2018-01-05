@@ -19,6 +19,13 @@ Navigate to http://localhost:8080/
 
 Matrix driver & Unicorn Hat HD driver inspired by https://github.com/vesteraas/node-unicornhathd
 
+### Unit tests
+This application has some unit tests, making use of [Jest](http://facebook.github.io/jest/). Jest is configured as a dev dependency.
+
+execute:
+
+    npm test
+
 ### Drawing
 ![Device drawing](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/device.jpg "Drawing on the device")
 

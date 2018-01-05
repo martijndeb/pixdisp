@@ -18,6 +18,7 @@
   },
   "jest": {
     "name": "pixdisp",
-    "testRegex": "(/__tests__/.[^_]*|(\\.|/)(test|spec))\\.jsx?$"
+    "testRegex": "(/__tests__/.[^_]*|(\\.|/)(test|spec))\\.jsx?$",
+    "verbose": true
   }
 }

@@ -64,8 +64,8 @@ class Driver {
 	 * Set pixel color
 	 */
 	setPixel( x, y, r = 0, g = 0, b = 0, a = 1 ) {
-		if ( x >= 0 && x <= this.width &&
-			 y >= 0 && y <= this.height ) {
+		if ( x >= 0 && x < this.width &&
+			 y >= 0 && y < this.height ) {
 			this.matrix[x][y].r = r;
 			this.matrix[x][y].g = g;
 			this.matrix[x][y].b = b;
@@ -167,6 +167,13 @@ class Driver {
 				err += dx - ( radius << 1 );
 			}
 		}
+	}
+
+	/**
+	 * Returns the current matrix at any given state
+	 */
+	getMatrix() {
+		return this.matrix;
 	}
 
 	/**

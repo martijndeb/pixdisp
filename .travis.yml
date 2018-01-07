@@ -10,5 +10,6 @@ notifications:
 after_success:
   - npm i sidekick
   - sidekick run --travis
+  - npm run lint
   - npm install codeclimate-test-reporter
   - codeclimate-test-reporter < __coverage__/lcov.info

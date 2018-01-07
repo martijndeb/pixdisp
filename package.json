@@ -15,7 +15,8 @@
     "jest": "^22.0.4"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint drivers/* controllers/*"
   },
   "jest": {
     "name": "pixdisp",

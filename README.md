@@ -28,6 +28,10 @@ execute:
 
     npm test
 
+Some code linting practices and security tests can be executed by running the lint task:
+
+    npm run lint
+
 ### Drawing
 ![Device drawing](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/device.jpg "Drawing on the device")
 

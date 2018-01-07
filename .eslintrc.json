@@ -3,7 +3,13 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "plugins": [
+        "security"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:security/recommended"
+    ],
     "parserOptions": {
         "sourceType": "module"
     },
@@ -25,6 +31,8 @@
             "always"
         ],
         "no-case-declarations": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "security/detect-new-buffer": "off",
+        "security/detect-object-injection": "off"
     }
 }

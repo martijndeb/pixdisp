@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "eslint": "^4.15.0",
+    "eslint-plugin-security": "^1.4.0",
     "jest": "^22.0.4"
   },
   "scripts": {

@@ -9,16 +9,15 @@ class PimoroniUnicorn extends Driver {
 		super();
 
 		this.spi = false;
-		this.spiPath = '/dev/spidev0.0';
 	}
 
 	write( buffer ) {
 		if ( this.spi === false) {
-			if ( fs.existsSync( this.spiPath ) ) {
+			if ( fs.existsSync( '/dev/spidev0.0' ) ) {
 				let SPI = require( 'pi-spi' );
-				this.spi = SPI.initialize( this.spiPath );
+				this.spi = SPI.initialize( '/dev/spidev0.0' );
 			} else {
-				console.warn( 'Device path ' + this.spiPath + ' was unavailable.' );
+				console.warn( 'Device path \'/dev/spidev0.0\' was unavailable.' );
 				return;
 			}
 		}

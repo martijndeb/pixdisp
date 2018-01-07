@@ -4,6 +4,7 @@ let fs = require( 'fs' );
 let os = require( 'os' );
 
 let config,
+    vmcontroller,
     api,
     contents;
 
@@ -29,6 +30,7 @@ let driver;
 let { DriverFactory } = require( './drivers/driverfactory' );
 let driverFactory = new DriverFactory();
 
+let { VMController } = require( './controllers/vmcontroller' );
 let { ApiController } = require( './controllers/apicontroller' );
 
 let restify = require( 'restify' );
@@ -57,7 +59,8 @@ server.use( restify.plugins.throttle(
 driver = driverFactory.createFromConfig( config );
 driver.write( driver.getBuffer() );
 
-api = new ApiController( server, driver );
+vmcontroller = new VMController( driver );
+api = new ApiController( server, driver, vmcontroller );
 
 server.get(/.*/, restify.plugins.serveStatic({
 

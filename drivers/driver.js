@@ -202,7 +202,7 @@ class Driver {
 	/**
 	 * Write output to the device. Implement at driver level.
 	 */
-	write( buffer ) { //eslint-disable-line no-unused-vars
+	write( buffer = false ) { //eslint-disable-line no-unused-vars
 		console.log( 'Driver should implement this' );
 	}
 

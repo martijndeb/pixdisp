@@ -2,23 +2,25 @@
 
 class ApiController {
 
-	constructor( server, driver ) {
+	constructor( server, driver, vmcontroller ) {
 
 		this.server = server;
 		this.driver = driver;
+		this.vmcontroller = vmcontroller;
 
 		this.server.post( { path: '/api/writecanvas' }, this.writeCanvas.bind( this ) );
+		this.server.post( { path: '/api/runcode' }, this.runCode.bind( this ) );
+
 		this.server.get( { path: '/api/write' }, this.write.bind( this ) );
 		this.server.get( { path: '/api/getdisplaysize' }, this.getDisplaySize.bind( this ) );
 		this.server.get( { path: '/api/setpixel/:x/:y/:r/:g/:b' }, this.setPixel.bind( this ) );
+		this.server.get( { path: '/api/getcode' }, this.getCode.bind( this ) );
 
 	}
 
 	writeCanvas( request, resource, next ) {
 
 		this.driver.clearMatrix();
-
-		resource.setHeader( 'Access-Control-Allow-Origin', '*' );
 
 		let data = JSON.parse( request.params.data );
 
@@ -36,8 +38,6 @@ class ApiController {
 
 	write( request, resource, next ) {
 
-		resource.setHeader( 'Access-Control-Allow-Origin', '*' );
-
 		let buffer = this.driver.getBuffer();
 		this.driver.write( buffer );
 
@@ -48,16 +48,12 @@ class ApiController {
 
 	getDisplaySize( request, resource, next ) {
 
-		resource.setHeader( 'Access-Control-Allow-Origin', '*' );
-
 		resource.json( 200, this.driver.getSize() );
 		return next();
 
 	}
 
 	setPixel( request, resource, next ) {
-
-		resource.setHeader( 'Access-Control-Allow-Origin', '*' );
 
 		this.driver.setPixel(
 			request.params.x,
@@ -66,6 +62,25 @@ class ApiController {
 			request.params.g,
 			request.params.b
 		);
+
+		resource.json( 200, { 'msg': 'Ok' } );
+		return next();
+
+	}
+
+	getCode( request, resource, next ) {
+
+		resource.send( this.vmcontroller.runningCode );
+		return next();
+
+	}
+
+	runCode( request, resource, next ) {
+
+		this.runningCode = request.params.code;
+
+		this.vmcontroller.compileScript( this.runningCode );
+		this.vmcontroller.runScript();
 
 		resource.json( 200, { 'msg': 'Ok' } );
 		return next();

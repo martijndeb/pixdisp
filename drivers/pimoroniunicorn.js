@@ -11,7 +11,7 @@ class PimoroniUnicorn extends Driver {
 		this.spi = false;
 	}
 
-	write( buffer ) {
+	write( buffer = false ) {
 		if ( this.spi === false) {
 			if ( fs.existsSync( '/dev/spidev0.0' ) ) {
 				let SPI = require( 'pi-spi' );
@@ -20,6 +20,10 @@ class PimoroniUnicorn extends Driver {
 				console.warn( 'Device path \'/dev/spidev0.0\' was unavailable.' );
 				return;
 			}
+		}
+
+		if ( buffer === false ) {
+			buffer = this.getBuffer();
 		}
 
 		this.spi.write(

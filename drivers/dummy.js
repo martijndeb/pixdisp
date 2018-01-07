@@ -9,7 +9,7 @@ class Dummy extends Driver {
 		this.silence = false;
 	}
 
-	write( buffer ) {
+	write( buffer = false ) {
 		if ( this.silence !== true ) {
 			console.log( buffer );
 		}

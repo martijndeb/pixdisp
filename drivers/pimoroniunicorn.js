@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let { Driver } = require( './driver' );
 let fs = require( 'fs' );
@@ -25,8 +25,10 @@ class PimoroniUnicorn extends Driver {
 
 		this.spi.write(
 			Buffer.concat(
-				[ new Buffer( [ 0x72 ] ),
-				  buffer ]
+				[
+					new Buffer( [ 0x72 ] ),
+					buffer
+				]
 			),
 
 			function ( err ) {

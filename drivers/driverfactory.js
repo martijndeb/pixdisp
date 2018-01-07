@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class DriverFactory {
 	constructor() {
@@ -10,17 +10,19 @@ class DriverFactory {
 
 		switch ( config.driver.toLowerCase() ) {
 
-			default:
-				console.warn( "Unknown driver defaulting to Dummy" );
-
-			case "dummy":
-				let { Dummy } = require( './dummy' );
-				driver = new Dummy();
+		default:
+			// eslint-disable-next-line
+			console.warn( 'Unknown driver defaulting to Dummy' );
 			break;
 
-			case "pimoroniunicorn":
-				let { PimoroniUnicorn } = require( './pimoroniunicorn' );
-				driver = new PimoroniUnicorn();
+		case 'dummy':
+			let { Dummy } = require( './dummy' );
+			driver = new Dummy();
+			break;
+
+		case 'pimoroniunicorn':
+			let { PimoroniUnicorn } = require( './pimoroniunicorn' );
+			driver = new PimoroniUnicorn();
 			break;
 
 		}

@@ -11,6 +11,7 @@
     "restify": "^6.3.4"
   },
   "devDependencies": {
+    "eslint": "^4.15.0",
     "jest": "^22.0.4"
   },
   "scripts": {

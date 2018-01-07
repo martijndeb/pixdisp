@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Basic matrix driver which every implementation can derive from
@@ -65,7 +65,7 @@ class Driver {
 	 */
 	setPixel( x, y, r = 0, g = 0, b = 0, a = 1 ) {
 		if ( x >= 0 && x < this.width &&
-			 y >= 0 && y < this.height ) {
+			y >= 0 && y < this.height ) {
 			this.matrix[x][y].r = r;
 			this.matrix[x][y].g = g;
 			this.matrix[x][y].b = b;
@@ -78,13 +78,13 @@ class Driver {
 	 */
 	getPixel( x, y ) {
 		if ( x >= 0 && x <= this.width &&
-			 y >= 0 && y <= this.height ) {
+			y >= 0 && y <= this.height ) {
 			return {
 				r: this.matrix[x][y].r,
 				g: this.matrix[x][y].g,
 				b: this.matrix[x][y].b,
 				a: this.matrix[x][y].a
-			}
+			};
 		}
 
 		return {
@@ -92,7 +92,7 @@ class Driver {
 			g: -1,
 			b: -1,
 			a: -1
-		}
+		};
 	}
 
 	/**
@@ -202,7 +202,7 @@ class Driver {
 	/**
 	 * Write output to the device. Implement at driver level.
 	 */
-	write( buffer ) {
+	write( buffer ) { //eslint-disable-line no-unused-vars
 		console.log( 'Driver should implement this' );
 	}
 

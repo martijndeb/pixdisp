@@ -3,10 +3,33 @@
 class App
 {
 	constructor() {
+		this.setupCodeEditor();
+
 		let request = new XMLHttpRequest();
 		request.open( 'GET', '/api/getdisplaysize', true );
 		request.onload = this.onGetDisplaySizeFinished;
 		request.send();
+
+		let requestCode = new XMLHttpRequest();
+		requestCode.open( 'GET', '/api/getcode', true );
+		requestCode.onload = this.onGetCodeFinished;
+		requestCode.send();
+	}
+
+	setupCodeEditor() {
+		ace.require( 'ace/ext/language_tools' );
+
+		this.editor = ace.edit( 'editor' );
+		this.editor.setTheme( 'ace/theme/monokai' );
+		this.editor.session.setMode( 'ace/mode/javascript' );
+
+		this.editor.setOptions( {
+			enableBasicAutocompletion: true,
+			enableSnippets: true,
+			enableLiveAutocompletion: true
+		} );
+
+		this.editor.setHighlightActiveLine( true );
 	}
 
 	onGetDisplaySizeFinished() {
@@ -15,6 +38,13 @@ class App
 
 			app.createCanvas( resp.width, resp.height );
 			app.createPalette();
+		}
+	}
+
+	onGetCodeFinished() {
+		if ( this.status >= 200 && this.status < 400 ) {
+			let resp = JSON.parse( this.responseText );
+			app.editor.setValue( resp );
 		}
 	}
 
@@ -31,6 +61,7 @@ class App
 		canvas.addEventListener( 'click', this.handleCanvas );
 		document.getElementById( 'submitImage' ).addEventListener( 'click', this.submitCanvas );
 		document.getElementById( 'captureCamera' ).addEventListener( 'click', this.captureCamera );
+		document.getElementById( 'submitCode' ).addEventListener( 'click', this.submitCode );
 
 		this.canvas = canvas;
 		this.context = canvas.getContext( '2d' );
@@ -156,6 +187,24 @@ class App
 				console.warn( err );
 			} )
 		;
+
+	}
+
+	submitCode( ev ) {
+
+		if ( ev.preventDefault ) {
+			ev.preventDefault();
+		}
+
+		let code = app.editor.getValue();
+		let request = new XMLHttpRequest();
+
+		request.open( 'POST', '/api/runcode', true );
+		request.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
+
+		let obj = encodeURI( 'code=' + btoa( code ) );
+
+		request.send( obj );
 
 	}
 

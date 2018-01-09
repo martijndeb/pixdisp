@@ -77,7 +77,7 @@ class ApiController {
 
 	runCode( request, resource, next ) {
 
-		this.runningCode = request.params.code;
+		this.runningCode = new Buffer( request.params.code, 'base64' ).toString( 'binary' );
 
 		this.vmcontroller.compileScript( this.runningCode );
 		this.vmcontroller.runScript();

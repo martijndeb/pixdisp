@@ -34,8 +34,22 @@ class VMController
 	}
 
 	resetSandbox() {
+		let matrixSize = this.driver.getSize();
+
 		this.sandbox = {
-			'matrix': this.driver,
+			'WIDTH': matrixSize.width,
+			'HEIGHT': matrixSize.height,
+
+			'setBrightness': this.driver.setBrightness.bind( this.driver ),
+			'getBrightness': this.driver.getBrightness.bind( this.driver ),
+			'setPixel': this.driver.setPixel.bind( this.driver ),
+			'getPixel': this.driver.getPixel.bind( this.driver ),
+			'drawLine': this.driver.drawLine.bind( this.driver ),
+			'drawRect': this.driver.drawRect.bind( this.driver ),
+			'drawRectFilled': this.driver.drawRectFilled.bind( this.driver ),
+			'drawCircle': this.driver.drawCircle.bind( this.driver ),
+			'write': this.driver.write.bind( this.driver ),
+
 			'delta': this.getDelta.bind( this )
 		};
 	}

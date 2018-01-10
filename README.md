@@ -50,6 +50,6 @@ A simple web interface is included for drawing on the device. Defaults to port 8
 ### Coding
 ![Coding](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/animation.jpg "Coding")
 
-[![Demo](http://img.youtube.com/vi/4mPzOF_h1kQ/0.jpg)](http://www.youtube.com/watch?v=4mPzOF_h1kQ)
+[![Demo](http://img.youtube.com/vi/4mPzOF_h1kQ/0.jpg)](http://www.youtube.com/watch?v=4mPzOF_h1kQ) (Click for youtube)
 
 With an advanced editor you can write simple animations in the browser using a secure sandboxed javascript. Documentation will follow here once the API is final.

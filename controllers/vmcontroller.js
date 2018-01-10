@@ -11,6 +11,7 @@ class VMController
 		this.delta = 0;
 		this.sandbox = {};
 		this.vm = null;
+		this.runNextFrame = false;
 
 	}
 
@@ -34,9 +35,11 @@ class VMController
 	}
 
 	resetSandbox() {
+		this.previousTime = this.getTimeData();
 		let matrixSize = this.driver.getSize();
 
 		this.sandbox = {
+			'sandbox': {},
 			'WIDTH': matrixSize.width,
 			'HEIGHT': matrixSize.height,
 
@@ -51,7 +54,8 @@ class VMController
 			'drawCircle': this.driver.drawCircle.bind( this.driver ),
 			'write': this.driver.write.bind( this.driver ),
 
-			'delta': this.getDelta.bind( this )
+			'delta': this.getDelta.bind( this ),
+			'run': this.run.bind( this )
 		};
 	}
 
@@ -60,17 +64,18 @@ class VMController
 		let delta = 0;
 		let tmd = this.getTimeData();
 
-		if ( this.previousTime === 0 ) {
-			this.previousTime = tmd;
-		} else {
-			delta = tmd - this.previousTime;
-			this.previousTime = tmd;
-		}
+		delta = tmd - this.previousTime;
 
-		this.delta = delta;
+		this.previousTime = tmd;
+
+		this.delta = delta / 1000000;
 
 		this.vm.run( this.runningVmScript, 'pixdisp-sandbox.js' );
 
+		if ( this.runNextFrame === true ) {
+			this.runNextFrame = false;
+			setTimeout( this.runScript.bind( this ), 1 );
+		}
 	}
 
 	getTimeData() {
@@ -84,6 +89,10 @@ class VMController
 
 	getDelta() {
 		return this.delta;
+	}
+
+	run() {
+		this.runNextFrame = true;
 	}
 }
 

@@ -35,7 +35,7 @@ Some code linting practices and security tests can be executed by running the li
 ### Drawing
 ![Device drawing](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/device.jpg "Drawing on the device")
 
-Simple clicking on the canvas in the responsive webinterface makes things light up.
+Simple clicking on the canvas in the responsive webinterface makes things light up, when you press submit it will get sent to the device.
 
 ### Camera
 ![Using your camera](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/camera.jpg "Using your camera")
@@ -46,3 +46,10 @@ The webinterface allows you to capture your camera and submit images from there.
 ![Web interface](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/webui.png "Webinterface")
 
 A simple web interface is included for drawing on the device. Defaults to port 8080.
+
+### Coding
+![Coding](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/animation.jpg "Coding")
+
+[![Demo](http://img.youtube.com/vi/4mPzOF_h1kQ/0.jpg)](http://www.youtube.com/watch?v=4mPzOF_h1kQ)
+
+With an advanced editor you can write simple animations in the browser using a secure sandboxed javascript. Documentation will follow here once the API is final.

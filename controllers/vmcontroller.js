@@ -40,6 +40,7 @@ class VMController
 			'WIDTH': matrixSize.width,
 			'HEIGHT': matrixSize.height,
 
+			'clear': this.driver.clear.bind( this.driver ),
 			'setBrightness': this.driver.setBrightness.bind( this.driver ),
 			'getBrightness': this.driver.getBrightness.bind( this.driver ),
 			'setPixel': this.driver.setPixel.bind( this.driver ),

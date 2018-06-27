@@ -54,27 +54,27 @@ class VMController
 			'drawCircle': this.driver.drawCircle.bind( this.driver ),
 			'write': this.driver.write.bind( this.driver ),
 
-			'delta': this.getDelta.bind( this ),
+			'getDelta': this.getDelta.bind( this ),
 			'run': this.run.bind( this )
 		};
 	}
 
 	runScript( ) {
 
-		let delta = 0;
+		let deltaLocal = 0;
 		let tmd = this.getTimeData();
 
-		delta = tmd - this.previousTime;
+		deltaLocal = tmd - this.previousTime;
 
 		this.previousTime = tmd;
 
-		this.delta = delta / 1000000;
+		this.delta = deltaLocal / 1000000;
 
 		this.vm.run( this.runningVmScript, 'pixdisp-sandbox.js' );
 
 		if ( this.runNextFrame === true ) {
 			this.runNextFrame = false;
-			setTimeout( this.runScript.bind( this ), 1 );
+			setTimeout( this.runScript.bind( this ), 1000 / 60 );
 		}
 	}
 

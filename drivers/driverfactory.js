@@ -25,6 +25,11 @@ class DriverFactory {
 			driver = new PimoroniUnicorn();
 			break;
 
+		case 'motionjpeg':
+			let { MotionJPEG } = require( './motionjpeg' );
+			driver = new MotionJPEG();
+			break;
+
 		}
 
 		driver.setSize( config.matrix.width, config.matrix.height );

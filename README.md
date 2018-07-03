@@ -21,6 +21,10 @@ Navigate to http://localhost:8080/
 
 Matrix driver & Unicorn Hat HD driver inspired by https://github.com/vesteraas/node-unicornhathd
 
+JPEG encoding by https://github.com/eugeneware/jpeg-js
+
+mjpeg-server by https://www.npmjs.com/package/mjpeg-server
+
 ### Unit tests
 This application has some unit tests, making use of [Jest](http://facebook.github.io/jest/). Jest is configured as a dev dependency.
 

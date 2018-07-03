@@ -240,6 +240,13 @@ class Driver {
 			}
 		}
 	}
+
+	/**
+	 * Implement cleaning up of driver tasks here
+	 */
+	cleanup() {
+
+	}
 }
 
 exports.Driver = Driver;

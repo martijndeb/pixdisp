@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Controller for maintaining and running sandboxed code as sent by the API.
+ */
 class VMController
 {
 	constructor( driver ) {
@@ -15,10 +18,16 @@ class VMController
 
 	}
 
+	/**
+	 * Current running code
+	 */
 	getRunningCode() {
 		return this.runningCode;
 	}
 
+	/**
+	 * Compile step one, assign sandbox and set the runningScript
+	 */
 	compileScript( script ) {
 
 		let { NodeVM, VMScript } = require( 'vm2' );
@@ -34,6 +43,10 @@ class VMController
 
 	}
 
+	/**
+	 * Reset the sandbox of available properties to keep things secure between script frames.
+	 * Every frame and compilation will have it's own new sandbox.
+	 */
 	resetSandbox() {
 		this.previousTime = this.getTimeData();
 		let matrixSize = this.driver.getSize();
@@ -59,6 +72,9 @@ class VMController
 		};
 	}
 
+	/**
+	 * Initialize compilation, next frame calculation and delta time calculation
+	 */
 	runScript( ) {
 
 		let deltaLocal = 0;
@@ -78,6 +94,9 @@ class VMController
 		}
 	}
 
+	/**
+	 * Calculate the time passed
+	 */
 	getTimeData() {
 		let hrTime = process.hrtime();
 		return hrTime[ 0 ] * 1000000 + hrTime[ 1 ] / 1000;

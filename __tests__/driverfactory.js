@@ -46,4 +46,6 @@ test( 'MotionJPEG driver to be properly created', () => {
 
 	expect( driver ).toBeInstanceOf( MotionJPEG );
 	expect( driver.write( driver.getBuffer() ) ).toBeUndefined();
+
+	driver.cleanup();
 } );

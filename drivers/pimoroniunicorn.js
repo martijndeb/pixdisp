@@ -11,6 +11,9 @@ class PimoroniUnicorn extends Driver {
 		this.spi = false;
 	}
 
+	/**
+	 * Write buffer to the SPI device if possible
+	 */
 	write( buffer = false ) {
 		if ( this.spi === false) {
 			if ( fs.existsSync( '/dev/spidev0.0' ) ) {
@@ -40,6 +43,15 @@ class PimoroniUnicorn extends Driver {
 				}
 			}
 		);
+	}
+
+	/**
+	 * Close lingering SPI device for test runner
+	 */
+	cleanup() {
+		if ( this.spi !== false ) {
+			this.spi.close();
+		}
 	}
 }
 

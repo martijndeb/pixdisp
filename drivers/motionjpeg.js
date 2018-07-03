@@ -1,22 +1,25 @@
 'use strict';
 
 let { Driver } = require( './driver' );
-let fs = require( 'fs' );
 let http = require( 'http' );
 let mjpegServer = require( 'mjpeg-server' );
 let jpeg = require( 'jpeg-js' );
 
 let mjpegReqHandler = undefined;
+let httpServer = undefined;
 
 class MotionJPEG extends Driver {
 	constructor() {
 		super();
 
-		this.httpServer = http.createServer( function( req, res ) {
+		httpServer = http.createServer( function( req, res ) {
 			mjpegReqHandler = mjpegServer.createReqHandler( req, res );
 		} ).listen( 8081, '0.0.0.0' );
 	}
 
+	/**
+	 * Writes the current buffer to the motionjpeg stream
+	 */
 	write( buffer = false ) {
 		if ( mjpegReqHandler === undefined) {
 			return;
@@ -36,14 +39,24 @@ class MotionJPEG extends Driver {
 			}
 		}
 
+		// Buffor should be complete here
 		var imageData = {
 			data: buffer,
 			width: this.width,
 			height: this.height
 		};
 
-		var dt = jpeg.encode( imageData, 50 );
+		var dt = jpeg.encode( imageData, 100 );
 		mjpegReqHandler.write( dt.data );
+	}
+
+	/**
+	 * Close all http server requests
+	 */
+	cleanup() {
+		if ( httpServer !== undefined ) {
+			httpServer.close();
+		}
 	}
 }
 

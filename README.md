@@ -8,7 +8,7 @@ A small application to drive LED matrix displays, such as the [Pimoroni Unicorn]
 
 Make sure you are on a recent nodejs version. Raspbian has an old version. Use [Nodesource](https://github.com/nodesource/distributions) ;).
 
-Also, use a decent modern browser. I wrote recent syntax, so probably works best in Chrome 62+. Firefox is known to have some issues, Edge works, Safari is a PITA. Just wait for your browser to play catch up then with recent standards. If you dislike Chrome, you can put this trough Babel. But you're on your own there.
+Also, use a decent modern browser. I wrote recent syntax, so probably works best in Chrome 62+. Firefox is known to have some issues, Edge works, Safari is a PITA. Just wait for your browser to play catch up then with recent standards. If you dislike Chrome, you can put this through Babel. But you're on your own there.
 
 Copy config.example.json to config.json and pick a driver + display size.
 
@@ -39,7 +39,7 @@ Some code linting practices and security tests can be executed by running the li
 ### Drawing
 ![Device drawing](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/device.jpg "Drawing on the device")
 
-Simple clicking on the canvas in the responsive webinterface makes things light up, when you press submit it will get sent to the device.
+Simple clicking on the canvas in the responsive webinterface makes things light up; when you press submit it will get sent to the device.
 
 ### Camera
 ![Using your camera](https://raw.githubusercontent.com/sexybiggetje/pixdisp/screenshots/camera.jpg "Using your camera")

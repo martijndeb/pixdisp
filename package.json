@@ -11,7 +11,8 @@
     "mjpeg-server": "^0.3.0",
     "pi-spi": "^1.0.3",
     "restify": "^6.4.0",
-    "vm2": "^3.6.10"
+    "vm2": "^3.6.10",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -20,7 +21,9 @@
   },
   "scripts": {
     "test": "jest --forceExit",
-    "lint": "./node_modules/.bin/eslint drivers/* controllers/*"
+    "lint": "./node_modules/.bin/eslint drivers/* controllers/*",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "jest": {
     "name": "pixdisp",
@@ -36,5 +39,6 @@
       "drivers/**",
       "controllers/**"
     ]
-  }
+  },
+  "snyk": true
 }

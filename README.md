@@ -17,6 +17,8 @@ execute:
     npm install
     nodejs pixdisp.js
 
+optionally npm install pi-spi jpeg-js mjpeg-server
+
 Navigate to http://localhost:8080/
 
 Matrix driver & Unicorn Hat HD driver inspired by https://github.com/vesteraas/node-unicornhathd

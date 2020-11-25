@@ -9,7 +9,7 @@
   "dependencies": {
     "restify": "^8.1.0",
     "vm2": "^3.6.11",
-    "snyk": "^1.316.1"
+    "snyk": "^1.425.4"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

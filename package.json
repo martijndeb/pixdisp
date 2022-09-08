@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "restify": "^8.1.1",
-    "vm2": "^3.9.6",
+    "vm2": "^3.9.11",
     "snyk": "^1.685.0"
   },
   "devDependencies": {
